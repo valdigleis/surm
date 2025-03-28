@@ -30,7 +30,7 @@ import java.util.ArrayList;
  * This class implements the notion of program to Unlimited Register Machine.
  * 
  * @author Valdigleis (valdigleis@dimap.ufrn.br)
- * @author INSIRA_SEU_NOME (INSIRA_SEU_EMAIL)
+ * @author Filipe Campos (filipe.campos.127@ufrn.edu.br)
  * @version 1.0
  */
 public class Program {
@@ -67,7 +67,11 @@ public class Program {
    * @return The instruction in line.
    */
   public Instruction getInstruction(int numberLine) {
-    return this.instructions.get(numberLine);
+    if (numberLine <= this.instructions.size()) {
+        return this.instructions.get(numberLine);
+    } else {
+        return null;
+    }
   }
 
 

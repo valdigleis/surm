@@ -24,6 +24,7 @@
 package br.com.surm.core;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * 
@@ -31,7 +32,7 @@ import java.util.ArrayList;
  * Computability: An Introduction to Recursive Function Theory by Nigel Cutland.
  * 
  * @author Valdigleis (valdigleis@dimap.ufrn.br)
- * @author INSIRA_SEU_NOME (INSIRA_SEU_EMAIL)
+ * @author Filipe Campos (filipe.campos.127@ufrn.edu.br)
  * @version 1.0
  */
 public class URM {
@@ -73,6 +74,24 @@ public class URM {
 
   /**
    * 
+   * Constructor of the URM class, which loads the program and initializes n registers with a Vector of values on input.
+   * 
+   * @param program The program loaded into the URM.
+   * @param values The n values to set in first n registers.
+   */
+  public URM(Program program, Vector<Integer> values) {
+    this.program = program;
+    this.countProgram = 0;
+    this.registers = new ArrayList<>(values.size());
+    int j = 0;
+    for (int i : values) {
+      this.registers.set(j, i);
+      j++;
+    }
+  }
+
+  /**
+   * 
    * Constructor of the URM class, which loads the program and Initializes n specific registers with predefined values
    * 
    * @param program The program loaded into the URM.
@@ -103,6 +122,29 @@ public class URM {
 
   /**
    * 
+   * Constructor of the URM class, which loads the program and Initializes n specific registers with a Vector of predefined values
+   * 
+   * @param program The program loaded into the URM.
+   * @param registers The “addresses” of the registers that should be initialized.
+   * @param values The values to set on registers.
+   */
+  public URM(Program program, Vector<Integer> values, Vector<Integer> registers) {
+
+    this.countProgram = 0;
+    this.program = program;
+    this.registers = new ArrayList<>(registers.size());
+    int j = 0;
+    for (int i : values) {
+      while (registers.get(j) >= this.registers.size()) { // Extremely dangerous code, but it works nicely
+        this.registers.add(0);
+      }
+      this.registers.set(registers.get(j), i);
+      j++;
+    }
+  }
+
+  /**
+   * 
    * Method that executes only one instruction of the program loaded in the URM, this instruction being the one pointed to by the URM program counter.
    * 
    */
@@ -116,6 +158,8 @@ public class URM {
         case "S":
           break;
         case "T":
+          break;
+        case "J":
           break;
         default:
           break;
@@ -139,6 +183,8 @@ public class URM {
         case "S":
           break;
         case "T":
+          break;
+        case "J":
           break;
         default:
           break;
